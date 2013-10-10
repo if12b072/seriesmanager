@@ -1,0 +1,152 @@
+﻿<common:NavigationPage
+    x:Class="GUI.MVVM.View.SeasonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:GUI.Common"
+    xmlns:converter="using:GUI.Converter"
+    xmlns:controls="using:GUI.Controls"
+    mc:Ignorable="d"
+    xmlns:behavior="using:GUI.MVVM.Behavior"
+    xmlns:extension="using:GUI.MVVM.Extensions"
+    x:Name="PageRoot"
+    NavigationCacheMode="Enabled">
+
+    <Page.Resources>
+        <converter:EnumVisibilityConverter x:Key="EnumVisibilityConverter" />
+        <converter:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
+        <converter:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <converter:EnumBrushConverter x:Key="EnumBrushConverter" />
+        <converter:EnumStringConverter x:Key="EnumStringConverter" />
+
+        <ItemsPanelTemplate x:Key="Landscape900EpisodeTemplate">
+            <VariableSizedWrapGrid ItemHeight="225" ItemWidth="400" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <GridView
+            x:Name="gridView"
+            Padding="116,137,40,30"
+            Grid.RowSpan="2"
+            Style="{StaticResource GridViewStyle}"
+            ItemsSource="{Binding SeasonModel.Episodes}"
+            SelectionMode="{Binding SelectionMode}"
+            extension:GridViewExtensions.BindableSelection="{Binding SelectedItems, Mode=TwoWay}"
+            behavior:EventToCommandBehavior.RoutedEvent="ItemClick"
+            behavior:EventToCommandBehavior.Command="{Binding ItemClickedCommand}">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid ItemHeight="190" ItemWidth="337" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Black">
+                        <Image Source="{Binding Image.Image, TargetNullValue=/Assets/SeasonViewPlaceholder.png}" Stretch="UniformToFill" />
+                        <Grid Background="{Binding State, Converter={StaticResource EnumBrushConverter}}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock FontSize="17" Text="{Binding Number}" Foreground="White" Margin="8,4,0,4" />
+                            <TextBlock Grid.Column="1" FontSize="17" Text="-" Foreground="White" Margin="8,4" />
+                            <TextBlock Grid.Column="2" Text="{Binding Name}" FontSize="17" Foreground="White" TextTrimming="WordEllipsis" Margin="0,4,30,4" />
+                        </Grid>
+                        <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE10B;" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,0" FontSize="22" Foreground="White" Visibility="{Binding State, Converter={StaticResource EnumVisibilityConverter}}"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.Header>
+                <StackPanel Margin="0,0,100,0">
+                    <Image HorizontalAlignment="Left" Width="290" Height="420" Stretch="UniformToFill" Source="{Binding SeasonModel.Banner.Image, TargetNullValue=/Assets/SeasonViewBannerPlaceholder.png}" />
+                    <Button Foreground="White" Background="{Binding SeasonModel.State, Converter={StaticResource EnumBrushConverter}}" Content="{Binding SeasonModel.State, Converter={StaticResource EnumStringConverter}}" FontSize="20" Padding="7" Command="{Binding SeasonStateCommand}" Style="{StaticResource SeriesWrapButton}" HorizontalContentAlignment="Center" />
+                </StackPanel>
+            </GridView.Header>
+        </GridView>
+
+        <ListView
+            x:Name="listView"
+            Visibility="Collapsed"
+            Style="{StaticResource ListViewStyle}"
+            Grid.RowSpan="2"
+            Padding="30,0"
+            Margin="0,140,0,0"
+            ItemsSource="{Binding SeasonModel.Episodes}"
+            SelectionMode="{Binding SelectionMode}"
+            extension:ListViewExtensions.BindableSelection="{Binding SelectedItems, Mode=TwoWay}"
+            behavior:EventToCommandBehavior.RoutedEvent="ItemClick"
+            behavior:EventToCommandBehavior.Command="{Binding ItemClickedCommand}"
+            ItemTemplate="{Binding ElementName=gridView, Path=ItemTemplate}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid ItemWidth="210" ItemHeight="117" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <AppBarButton Icon="Back" Height="95" Margin="10,46,10,0" Command="{Binding ElementName=PageRoot, Path=BackCommand}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource Mode=Self}}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock x:Uid="SeasonBox" Style="{StaticResource HeaderTextBlockStyle}" IsHitTestVisible="false" VerticalAlignment="Bottom" Margin="0,0,20,40"/>
+                <TextBlock Text="{Binding SeasonModel.Number}" Style="{StaticResource HeaderTextStyle}" IsHitTestVisible="False" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            </StackPanel>
+        </Grid>    
+        
+        <CommandBar x:Name="CommandBar" Grid.Row="1">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="SelectionClearAppBarButton" Icon="ClearSelection" Command="{Binding SelectionClearCommand}" />
+                <AppBarButton x:Uid="SelectionAllAppBarButton" Icon="SelectAll" Command="{Binding SelectionAllCommand}" />
+            </CommandBar.SecondaryCommands>
+            
+            <AppBarButton x:Uid="WatchedAppBarButton" Icon="Accept" Command="{Binding WatchStateCommand}" />
+            <AppBarButton x:Uid="UnwatchedAppBarButton" Icon="Cancel" Command="{Binding UnwatchStateCommand}" />
+        </CommandBar>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Landscape500">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="listView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Landscape768" />
+                <VisualState x:Name="Landscape900">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridView" Storyboard.TargetProperty="ItemsPanel">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Landscape900EpisodeTemplate}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+    
+</common:NavigationPage>

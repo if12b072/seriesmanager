@@ -1,0 +1,295 @@
+﻿<common:NavigationPage
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:GUI.Common"
+    xmlns:controls="using:GUI.Controls"
+    xmlns:converter="using:GUI.Converter"
+    x:Class="GUI.MVVM.View.SeriesView"
+    xmlns:behavior="using:GUI.MVVM.Behavior"
+    xmlns:extension="using:GUI.MVVM.Extensions"
+    mc:Ignorable="d"
+    NavigationCacheMode="Enabled">
+    
+    <Page.Resources>
+        <converter:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <converter:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
+        <converter:EnumVisibilityConverter x:Key="EnumVisibilityConverter" />
+        <converter:EnumBrushConverter x:Key="EnumBrushConverter" />
+        
+        <ItemsPanelTemplate x:Key="Landscape900SeasonTemplate">
+            <VariableSizedWrapGrid ItemHeight="300" ItemWidth="207" />
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="dataTemplate">
+            <Grid Background="Black">
+                <Image Source="{Binding Banner.Image, TargetNullValue=/Assets/SeasonViewBannerPlaceholder.png}" Stretch="UniformToFill" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="{Binding State, Converter={StaticResource EnumBrushConverter}}">
+                    <TextBlock x:Uid="SeasonBox" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4,0,4" />
+                    <TextBlock Text="{Binding Number}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                </StackPanel>
+                <TextBlock FontFamily="Segoe UI Symbol" Text="&#xE10B;" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,0" FontSize="22" Foreground="White" Visibility="{Binding State, Converter={StaticResource EnumVisibilityConverter}}"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ItemsControl x:Name="metaData" ItemsSource="{Binding ElementName=PageRoot, Path=DataContext.MetaData}" Margin="116,0,30,20" Grid.Row="1">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#A30707" Padding="6" Margin="0,0,10,5">
+                                    <TextBlock Foreground="White" Text="{Binding}" FontWeight="Bold" FontSize="20" />
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <controls:WrapPanel BlockSize="40" Orientation="Horizontal" Margin="0,0,0,10" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"  />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <GridView
+            x:Name="gridView"
+            Grid.RowSpan="2"
+            Padding="116,250,40,30"
+            Style="{StaticResource GridViewStyle}"
+            ItemsSource="{Binding ViewSource.Seasons}" 
+            behavior:EventToCommandBehavior.RoutedEvent="ItemClick"
+            behavior:EventToCommandBehavior.Command="{Binding SeasonCommand}"
+            SelectionMode="{Binding SelectionMode}"
+            extension:GridViewExtensions.BindableSelection="{Binding SelectedItems, Mode=TwoWay}"
+            ItemTemplate="{StaticResource dataTemplate}">
+            <GridView.Header>
+                <controls:WrapPanel x:Name="wrapPanel" Orientation="Vertical" BlockSpacing="6" Margin="0,0,60,0" BlockSize="300">
+                    <StackPanel Margin="3,3,3,7">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.8" />
+                        </StackPanel.Background>
+                        <ScrollViewer Padding="16,14,16,8" MaxHeight="300" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                            <TextBlock Text="{Binding ViewSource.Overview}" FontSize="16" TextWrapping="Wrap" LineHeight="26" Foreground="White" />
+                        </ScrollViewer>
+                        <Border Background="#A30707">
+                            <TextBlock x:Uid="OverviewTitle" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                        </Border>
+                    </StackPanel>
+                    <Button Command="{Binding ActorCommand}" Style="{StaticResource SeriesWrapButton}">
+                        <StackPanel>
+                            <Grid Height="110">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.8" />
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ViewSource.Actors[0].Image.Image, TargetNullValue=/Assets/Logo.scale-100.png}" Stretch="UniformToFill" />
+                                <Image Source="{Binding ViewSource.Actors[1].Image.Image}" Stretch="UniformToFill" Grid.Column="1" />
+                                <Image Source="{Binding ViewSource.Actors[2].Image.Image}" Stretch="UniformToFill" Grid.Column="2" />
+                            </Grid>
+                            <Border Background="#A30707">
+                                <TextBlock x:Uid="ActorsHeader" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding UnAiredCommand}" Style="{StaticResource SeriesWrapButton}" Visibility="{Binding UnAiredVisibility}">
+                        <Grid Height="50">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.8" />
+                            </Grid.Background>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Background="#4372AA" Padding="10">
+                                <TextBlock FontSize="26.667" Foreground="White" FontWeight="Bold" Text="{Binding ViewSource.UnAired.Count}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Border>
+                            <TextBlock x:Uid="UnAiredBoxie" FontSize="22" Foreground="White" Margin="16,0,6,0" VerticalAlignment="Center" Grid.Column="1" />
+                        </Grid>
+                    </Button>
+                    <Button Command="{Binding MediaCommand}" Style="{StaticResource SeriesWrapButton}">
+                        <StackPanel Background="Black">
+                            <Image Source="{Binding RandomFanArt.Thumbnail, TargetNullValue=/Assets/EpisodeViewPlaceholder.png}" Stretch="UniformToFill" />
+                            <Border Background="#A30707">
+                                <TextBlock x:Uid="MediaHeader" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding LatestUnwatchedCommand}" Visibility="{Binding LatestUnwatchedVisibility}" Style="{StaticResource SeriesWrapButton}">
+                        <StackPanel>
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.8" />
+                            </StackPanel.Background>
+
+                            <Border Padding="10,6" DataContext="{Binding LatestUnwatched}">
+                                <StackPanel>
+                                    <TextBlock Foreground="White" FontWeight="Bold" FontSize="20" Text="{Binding Name}" TextTrimming="WordEllipsis" />
+                                    <TextBlock Foreground="White" Text="{Binding Overview}" TextWrapping="Wrap" TextTrimming="WordEllipsis" FontSize="16" Grid.Row="1" FontWeight="Normal" FontStretch="Normal" MaxLines="3" />
+                                </StackPanel>
+                            </Border>
+                            <Grid Background="#A30707">
+                                <TextBlock x:Uid="LatestUnwatched" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Grid>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding NextUnAiredCommand}" Visibility="{Binding NextUnAiredVisibility}" Style="{StaticResource SeriesWrapButton}">
+                        <StackPanel>
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.8" />
+                            </StackPanel.Background>
+
+                            <Border Padding="10,6" DataContext="{Binding NextUnAired}">
+                                <StackPanel>
+                                    <TextBlock Foreground="White" FontWeight="Bold" FontSize="20" Text="{Binding Name}" TextTrimming="WordEllipsis" />
+                                    <TextBlock Foreground="White" Text="{Binding Overview}" TextWrapping="Wrap" TextTrimming="WordEllipsis" FontSize="16" Grid.Row="1" FontWeight="Normal" FontStretch="Normal" MaxLines="3" />
+                                </StackPanel>
+                            </Border>
+                            <Grid Background="#4372AA">
+                                <TextBlock x:Uid="NextUnAired" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Grid>
+                        </StackPanel>
+                    </Button>
+                </controls:WrapPanel>
+            </GridView.Header>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid ItemHeight="240" ItemWidth="166" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
+        
+        <ListView
+            Visibility="Collapsed"
+            x:Name="listView"
+            Style="{StaticResource ListViewStyle}"
+            Grid.RowSpan="2"
+            Padding="30,0"
+            Margin="0,140,0,0"
+            ItemsSource="{Binding ViewSource.Seasons}" 
+            behavior:EventToCommandBehavior.RoutedEvent="ItemClick"
+            behavior:EventToCommandBehavior.Command="{Binding SeasonCommand}"
+            SelectionMode="{Binding SelectionMode}"
+            extension:ListViewExtensions.BindableSelection="{Binding SelectedItems, Mode=TwoWay}"
+            ItemTemplate="{StaticResource dataTemplate}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Horizontal" ItemHeight="260" ItemWidth="180" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.Header>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                    <Button x:Name="listActors" Command="{Binding ActorCommand}" Style="{StaticResource SeriesWrapButton}">
+                        <StackPanel>
+                            <Grid Height="110">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.8" />
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding ViewSource.Actors[0].Image.Image, TargetNullValue=/Assets/Logo.scale-100.png}" Stretch="UniformToFill" />
+                                <Image Source="{Binding ViewSource.Actors[1].Image.Image}" Stretch="UniformToFill" Grid.Column="1" />
+                                <Image Source="{Binding ViewSource.Actors[2].Image.Image}" Stretch="UniformToFill" Grid.Column="2" />
+                            </Grid>
+                            <Border Background="#A30707">
+                                <TextBlock x:Uid="ActorsHeader" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding MediaCommand}" Style="{StaticResource SeriesWrapButton}" Margin="10,0,0,0">
+                        <StackPanel Background="Black">
+                            <Image Source="{Binding RandomFanArt.Thumbnail, TargetNullValue=/Assets/EpisodeViewPlaceholder.png}" Stretch="UniformToFill" Height="110" />
+                            <Border Background="#A30707">
+                                <TextBlock x:Uid="MediaHeader" Foreground="White" FontSize="16" FontWeight="Bold" Margin="6,4" />
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </ListView.Header>
+        </ListView>
+
+        <CommandBar x:Name="CommandBar" Grid.Row="1">
+            <AppBarButton x:Uid="WatchedAppBarButton" Icon="Accept" Command="{Binding WatchStateCommand}" />
+            <AppBarButton x:Uid="UnwatchedAppBarButton" Icon="Cancel" Command="{Binding UnwatchStateCommand}" />
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="SelectionClearAppBarButton" Icon="ClearSelection" Command="{Binding SelectionClearCommand}" />
+                <AppBarButton x:Uid="SelectionAllAppBarButton" Icon="SelectAll" Command="{Binding SelectionAllCommand}" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <AppBarButton Icon="Back" Height="95" Margin="10,46,10,0" Command="{Binding ElementName=PageRoot, Path=BackCommand}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource Mode=Self}}"/>
+            <TextBlock Text="{Binding ViewSource.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,40,20" VerticalAlignment="Bottom" Grid.Column="2">
+                <AppBarToggleButton x:Uid="SubscriptionAppBarToggleButton" IsCompact="True" Icon="Favorite" IsChecked="{Binding ViewSource.Subscription, Mode=TwoWay}" ToolTipService.ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Label}" />
+                <AppBarToggleButton x:Uid="SeriesStateAppBarToggleButton" IsCompact="True" Icon="Accept" IsChecked="{Binding ViewSource.State, Converter={StaticResource EnumBooleanConverter}, Mode=TwoWay, ConverterParameter=WatchState}" Command="{Binding StateCommand}" ToolTipService.ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Label}" Margin="10,0"/>
+                <AppBarToggleButton x:Uid="PinAppBarToggleButton" Icon="Pin" IsCompact="True" Command="{Binding TileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" IsChecked="{Binding TileExists, Mode=TwoWay}" ToolTipService.ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Label}" />
+            </StackPanel>
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Landscape500">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="listView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="metaData" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Landscape768" />
+                <VisualState x:Name="Landscape900">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridView" Storyboard.TargetProperty="ItemsPanel">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Landscape900SeasonTemplate}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</common:NavigationPage>

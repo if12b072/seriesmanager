@@ -1,0 +1,43 @@
+﻿<common:NavigationPage
+    x:Name="PageRoot"
+    x:Class="GUI.MVVM.View.MediaDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="using:GUI.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:behavior="using:GUI.MVVM.Behavior"
+    NavigationCacheMode="Enabled">
+    
+    <Grid Background="Black">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        
+        <FlipView
+            ItemsSource="{Binding Banners}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image Stretch="Uniform" Source="{Binding Image}" />
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+        <ProgressRing IsActive="{Binding Loading}" Width="200" Height="200" Background="Transparent" Foreground="White" />
+
+        <Grid Style="{StaticResource CommandBarGridStyle}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <AppBarButton x:Uid="AcceptAppBarButton" Icon="Accept" Command="{Binding OKCommand}" />
+                <AppBarButton x:Uid="CancelAppBarButton" Icon="Cancel" Command="{Binding ElementName=PageRoot, Path=BackCommand}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <AppBarButton x:Uid="LockScreenAppBarButton" Icon="SetLockScreen" Command="{Binding LockScreenCommand}" />
+                <AppBarButton x:Uid="SavePictureAppBarButton" Icon="Save" Command="{Binding SavePictureCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</common:NavigationPage>

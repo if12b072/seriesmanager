@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceptAppBarButton.Label" xml:space="preserve">
+    <value>OK</value>
+    <comment>MediaDetailView</comment>
+  </data>
+  <data name="ActorsHeader.Text" xml:space="preserve">
+    <value>Actors</value>
+    <comment>ActorsView</comment>
+  </data>
+  <data name="ActorsTitle.Text" xml:space="preserve">
+    <value>Actors:</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="AirAll" xml:space="preserve">
+    <value>Afterwards</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="AirMonth" xml:space="preserve">
+    <value>This Month</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="AirTime.Text" xml:space="preserve">
+    <value>AirTime: </value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="AirToday" xml:space="preserve">
+    <value>Today</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="AirWeek" xml:space="preserve">
+    <value>This Week</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="AirYear" xml:space="preserve">
+    <value>This Year</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="CancelAppBarButton.Label" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>MediaDetailView</comment>
+  </data>
+  <data name="DayButton.Text" xml:space="preserve">
+    <value>Today</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="Director" xml:space="preserve">
+    <value>Director</value>
+    <comment>EpisodeView</comment>
+  </data>
+  <data name="Episode" xml:space="preserve">
+    <value>Episode</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="EpisodeBox.Text" xml:space="preserve">
+    <value>Episodes</value>
+    <comment>SearchView</comment>
+  </data>
+  <data name="Episodes" xml:space="preserve">
+    <value>Episodes</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="EpisodeStateAppBarToggleButton.Label" xml:space="preserve">
+    <value>Watched</value>
+    <comment>EpisodeView</comment>
+  </data>
+  <data name="FirstAired" xml:space="preserve">
+    <value>First aired</value>
+    <comment>SeriesViewModel, EpisodeViewModel</comment>
+  </data>
+  <data name="Genre.Text" xml:space="preserve">
+    <value>Genre: </value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="GuestStars.Text" xml:space="preserve">
+    <value>Guest Stars: </value>
+    <comment>EpisodeView</comment>
+  </data>
+  <data name="HeaderUnAired.Text" xml:space="preserve">
+    <value>Not aired yet episodes</value>
+    <comment>AirViewModel</comment>
+  </data>
+  <data name="HeaderUnwatched" xml:space="preserve">
+    <value>Unwatched episodes</value>
+    <comment>AirViewModel</comment>
+  </data>
+  <data name="HeaderWatched" xml:space="preserve">
+    <value>Watched episodes</value>
+    <comment>AirViewModel</comment>
+  </data>
+  <data name="LockScreenAppBarButton.Label" xml:space="preserve">
+    <value>Lockscreen Background</value>
+    <comment>MediaDetailView</comment>
+  </data>
+  <data name="LockscreenMessage" xml:space="preserve">
+    <value>The lockscreen background image has been successfully changed!</value>
+    <comment>MediaDetailViewModel</comment>
+  </data>
+  <data name="LockscreenTitle" xml:space="preserve">
+    <value>Lockscreen Background changed</value>
+    <comment>MediaDetailViewModel</comment>
+  </data>
+  <data name="MediaAppBarButton.Label" xml:space="preserve">
+    <value>Backgrounds</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="MediaHeader.Text" xml:space="preserve">
+    <value>Seriesbackgrounds</value>
+    <comment>MediaView</comment>
+  </data>
+  <data name="Minutes.Text" xml:space="preserve">
+    <value>Minutes</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="MinutesAbbreviation" xml:space="preserve">
+    <value>min</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="MonthButton.Text" xml:space="preserve">
+    <value>This Month</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="Network.Text" xml:space="preserve">
+    <value>Network: </value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="NotRunning" xml:space="preserve">
+    <value>Finished</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="OverviewTitle.Text" xml:space="preserve">
+    <value>Overview</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="PinAppBarToggleButton.Label" xml:space="preserve">
+    <value>Pinned</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="ProgressTitle.Text" xml:space="preserve">
+    <value>Series progress:</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Continuuing</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="Runtime" xml:space="preserve">
+    <value>Runtime</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search series ...</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="SearchHeader" xml:space="preserve">
+    <value>Result for </value>
+    <comment>SearchViewModel</comment>
+  </data>
+  <data name="Season" xml:space="preserve">
+    <value>Season</value>
+    <comment>AirView</comment>
+  </data>
+  <data name="SeasonBox.Text" xml:space="preserve">
+    <value>Season</value>
+    <comment>SearchView</comment>
+  </data>
+  <data name="Seasons" xml:space="preserve">
+    <value>Seasons</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="SeasonStateAppBarToggleButton.Label" xml:space="preserve">
+    <value>Season watched</value>
+    <comment>SeasonView</comment>
+  </data>
+  <data name="SelectionClearAppBarButton.Label" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="SeriesStateAppBarToggleButton.Label" xml:space="preserve">
+    <value>Watched</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>App (SettingsPane)</comment>
+  </data>
+  <data name="SettingsButton.Text" xml:space="preserve">
+    <value>Settings</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="SettingsFlyout.Title" xml:space="preserve">
+    <value>Settings</value>
+    <comment>SettingsView</comment>
+  </data>
+  <data name="SettingsLanguageList.Header" xml:space="preserve">
+    <value>Series display language: </value>
+    <comment>SettingsView</comment>
+  </data>
+  <data name="SettingsTheme.Header" xml:space="preserve">
+    <value>Use dark design</value>
+    <comment>SettingsView</comment>
+  </data>
+  <data name="State.Text" xml:space="preserve">
+    <value>State: </value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="SubscriptionAppBarToggleButton.Label" xml:space="preserve">
+    <value>Favorite</value>
+    <comment>SubscriptionView, SeriesView</comment>
+  </data>
+  <data name="SubscriptionHeader.Text" xml:space="preserve">
+    <value>Favorites</value>
+    <comment>SubscriptionView</comment>
+  </data>
+  <data name="UnAired" xml:space="preserve">
+    <value>Not aired yet</value>
+    <comment>EnumStringConverter</comment>
+  </data>
+  <data name="UnAiredBoxie.Text" xml:space="preserve">
+    <value>Not aired yet</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="UnknownDate" xml:space="preserve">
+    <value>No date</value>
+    <comment>DateStringConverter</comment>
+  </data>
+  <data name="Unwatched" xml:space="preserve">
+    <value>Unwatched</value>
+    <comment>EnumStringConverter</comment>
+  </data>
+  <data name="UnwatchedAppBarButton.Label" xml:space="preserve">
+    <value>Mark as unseen</value>
+    <comment>SeasonView, AirView</comment>
+  </data>
+  <data name="UnwatchedBoxie.Text" xml:space="preserve">
+    <value>Unwatched</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>Watched</value>
+    <comment>EnumStringConverter</comment>
+  </data>
+  <data name="WatchedAppBarButton.Label" xml:space="preserve">
+    <value>Mark as seen</value>
+    <comment>SeasonView, AirView</comment>
+  </data>
+  <data name="WatchedBoxie.Text" xml:space="preserve">
+    <value>Watched</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Week</value>
+    <comment>AirViewConverter</comment>
+  </data>
+  <data name="WeekButton.Text" xml:space="preserve">
+    <value>This Week</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="Writer" xml:space="preserve">
+    <value>Writer</value>
+    <comment>EpisodeView</comment>
+  </data>
+  <data name="YearButton.Text" xml:space="preserve">
+    <value>This Year</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="NextUnAired.Text" xml:space="preserve">
+    <value>Next not aired episode</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="LatestUnwatched.Text" xml:space="preserve">
+    <value>Next unwatched episode</value>
+    <comment>SeriesView</comment>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+    <comment>EpisodeViewModel, SeriesViewModel</comment>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+    <comment>SeriesViewModel</comment>
+  </data>
+  <data name="SavePictureAppBarButton.Label" xml:space="preserve">
+    <value>Save image</value>
+    <comment>FrameDetailView</comment>
+  </data>
+  <data name="SearchButton.Text" xml:space="preserve">
+    <value>Search</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="SearchBarExplanation.Text" xml:space="preserve">
+    <value>Enter a series title to get an overview of all related results.</value>
+    <comment>FrameView</comment>
+  </data>
+  <data name="NoSubscription.Text" xml:space="preserve">
+    <value>Currently you do not have any favourites. Start adding one by opening the AppBar - right click or swipe from the bottom or top - and clicking on the "Search" button.</value>
+    <comment>SubscriptionView</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteAppBarButton.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="SelectionAllAppBarButton.Label" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+</root>

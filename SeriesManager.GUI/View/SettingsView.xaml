@@ -1,0 +1,35 @@
+﻿<SettingsFlyout
+    x:Class="SeriesManager.GUI.View.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GUI.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:converter="using:SeriesManager.Converter"
+    x:Uid="SettingsFlyout"
+    HeaderForeground="White"
+    HeaderBackground="#A30707"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    RequestedTheme="{Binding Theme}">
+
+    <SettingsFlyout.Resources>
+        <converter:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+    </SettingsFlyout.Resources>
+    
+    <StackPanel>
+        <ComboBox 
+            x:Uid="SettingsLanguageList"
+            x:Name="LanguageList" 
+            Width="200" 
+            HorizontalAlignment="Left"
+            SelectedItem="{Binding Language, Mode=TwoWay}"/>
+        
+        <ToggleSwitch
+            Margin="0,40,0,0"
+            x:Uid="SettingsTheme"
+            IsOn="{Binding Theme, Mode=TwoWay, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=ElementTheme}"
+            HorizontalAlignment="Left" />
+            
+    </StackPanel>
+</SettingsFlyout>

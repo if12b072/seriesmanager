@@ -1,0 +1,29 @@
+﻿namespace SeriesManager.Enum
+{
+    public enum Languages
+    {
+        Chinese,
+        Croatian,
+        Czech,
+        Dansk,
+        Deutsch,
+        English,
+        Español,
+        Français,
+        Greek,
+        Hebrew,
+        Italiano,
+        Japanese,
+        Korean,
+        Magyar,
+        Nederlands,
+        Norsk,
+        Polski,
+        Portuguese,
+        Russian,
+        Slovenian,
+        Suomeksi,
+        Svenska,
+        Turkish
+    }
+}
